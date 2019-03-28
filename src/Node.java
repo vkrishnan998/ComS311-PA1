@@ -5,43 +5,43 @@ public class Node {
 	Node parent;
 	int color;
 	
-	Node getParent(){
+	public Node getParent(){
 		return parent;
 	}
 	
-	Node getLeft(){
+	public Node getLeft(){
 		return left;
 	}
 	
-	Node getRight(){
+	public Node getRight(){
 		return right;
 	}
 	
-	int getKey(){
+	public int getKey(){
 		return 0;
 	}
 	
-	int getP(){
+	public int getP(){
 		return 0;
 	}
 	
-	int getVal(){
+	public int getVal(){
 		return 0;
 	}
 	
-	int getMaxVal(){
+	public int getMaxVal(){
 		return 0;
 	}
 	
-	Endpoints getEndpoint(){
+	public Endpoints getEndpoint(){
 		return null; 
 	}
 	
-	Endpoints getEmax(){
+	public Endpoints getEmax(){
 		return null;
 	}
 	
-	int getColor(){
+	public int getColor(){
 		return color;
 	}
 }
