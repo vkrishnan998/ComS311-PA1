@@ -3,12 +3,13 @@ import java.util.ArrayList;
 public class Intervals {
 	
 	RBTree rbT;
-	ArrayList<Integer> intervalIDs = new ArrayList<Integer>();
+	ArrayList<Integer> intervalIDs;
 	
 	
 	
 	public Intervals() {
-		
+		rbT = new RBTree();
+		intervalIDs = new ArrayList<Integer>();
 	}
 	
 	public void intervalInsert(int a, int b) {
