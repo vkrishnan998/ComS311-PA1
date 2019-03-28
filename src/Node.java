@@ -33,11 +33,11 @@ public class Node {
 		return 0;
 	}
 	
-	public Endpoints getEndpoint(){
+	public Endpoint getEndpoint(){
 		return null; 
 	}
 	
-	public Endpoints getEmax(){
+	public Endpoint getEmax(){
 		return null;
 	}
 	
