@@ -4,6 +4,12 @@ public class Node {
 	Node right;
 	Node parent;
 	int color;
+	int key;
+	int p;
+	int val;
+	int maxVal;
+	Endpoint emax;
+	Endpoint e;
 	
 	public Node getParent(){
 		return parent;
@@ -18,27 +24,27 @@ public class Node {
 	}
 	
 	public int getKey(){
-		return 0;
+		return key;
 	}
 	
 	public int getP(){
-		return 0;
+		return p;
 	}
 	
 	public int getVal(){
-		return 0;
+		return val;
 	}
 	
 	public int getMaxVal(){
-		return 0;
+		return maxVal;
 	}
 	
 	public Endpoint getEndpoint(){
-		return null; 
+		return e; 
 	}
 	
 	public Endpoint getEmax(){
-		return null;
+		return emax;
 	}
 	
 	public int getColor(){
