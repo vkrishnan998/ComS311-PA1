@@ -10,6 +10,11 @@ public class Node {
 	int maxval;
 	Endpoint emax;
 	
+	public Node(int key, int p) {
+		this.key = key;
+		this.p = p;
+	}
+	
 	public Node getParent(){
 		return parent;
 	}

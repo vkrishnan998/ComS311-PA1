@@ -10,7 +10,6 @@ public class RBTree {
 		root.color = 1;
 		nil.color = 1;
 		height = 1;
-		findBlackHeightAndSize(root);
 	}
 	
 	public Node getRoot() {
@@ -22,22 +21,34 @@ public class RBTree {
 	}
 	
 	public int getSize() {
+		findSize(root);
 		return size;
 	}
 	
 	public int getHeight() {
+		findBlackHeight(root);
 		return height;
 	}
 	
-	public void findBlackHeightAndSize(Node root) {
+	public void findBlackHeight(Node root) {
 		if (root == null) {
 			return;
 		}
 		if (root.color == 1) {
 			height++;
 		}
-		size++;
-		findBlackHeightAndSize(root);
-		findBlackHeightAndSize(root);
+		findBlackHeight(root.left);
+		findBlackHeight(root.right);
+	}
+	
+	public void findSize(Node root) {
+		if (root == null) {
+			return;
+		}
+		else {
+			size++;
+		}
+		findSize(root.left);
+		findSize(root.right);
 	}
 }
