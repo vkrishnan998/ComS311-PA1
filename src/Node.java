@@ -9,10 +9,13 @@ public class Node {
 	int val;
 	int maxval;
 	Endpoint emax;
+	Endpoint endPoint;
 	
 	public Node(int key, int p) {
 		this.key = key;
 		this.p = p;
+		val = 0;
+		endPoint = new Endpoint(key);
 	}
 	
 	public Node getParent(){
@@ -44,7 +47,7 @@ public class Node {
 	}
 	
 	public Endpoint getEndpoint(){
-		return null; 
+		return endPoint; 
 	}
 	
 	public Endpoint getEmax(){
@@ -53,5 +56,16 @@ public class Node {
 	
 	public int getColor(){
 		return color;
+	}
+	
+	public void calcVal(Node v) {
+		if (v == null) {
+			return;
+		}
+		else {
+			val += v.p;
+		}
+		calcVal(v.left);
+		calcVal(v.right);
 	}
 }

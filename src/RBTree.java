@@ -10,6 +10,7 @@ public class RBTree {
 		root.color = 1;
 		nil.color = 1;
 		height = 1;
+		root = nil;
 	}
 	
 	public Node getRoot() {
@@ -21,12 +22,10 @@ public class RBTree {
 	}
 	
 	public int getSize() {
-		findSize(root);
 		return size;
 	}
 	
 	public int getHeight() {
-		findBlackHeight(root);
 		return height;
 	}
 	
@@ -50,5 +49,13 @@ public class RBTree {
 		}
 		findSize(root.left);
 		findSize(root.right);
+	}
+	
+	public void s(Node a, Node b) {
+		
+	}
+	
+	public void insertNode() {
+		
 	}
 }

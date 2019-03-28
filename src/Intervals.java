@@ -1,6 +1,10 @@
-
+import java.util.ArrayList;
 
 public class Intervals {
+	
+	RBTree rbT;
+	ArrayList<Integer> intervalIDs = new ArrayList<Integer>();
+	
 	
 	
 	public Intervals() {
@@ -20,6 +24,8 @@ public class Intervals {
 	}
 	
 	public RBTree getRBTree() {
-		return null;
+		return rbT;
 	}
+	
+	
 }
