@@ -3,26 +3,59 @@
 public class RBTree {
 	Node root;
 	Node nil;
+	int height;
+	int size;
 	
 	public RBTree() {
-		
+		root.color = 1;
+		nil.color = 1;
+		height = 1;
+		root = nil;
 	}
 	
 	public Node getRoot() {
-		return null;
+		return root;
 	}
 	
 	public Node getNILNode() {
-		return null;
+		return nil;
 	}
 	
 	public int getSize() {
-		return 0;
+		return size;
 	}
 	
 	public int getHeight() {
-		return 0;
+		return height;
 	}
 	
+	public void findBlackHeight(Node root) {
+		if (root == null) {
+			return;
+		}
+		if (root.color == 1) {
+			height++;
+		}
+		findBlackHeight(root.left);
+		findBlackHeight(root.right);
+	}
 	
+	public void findSize(Node root) {
+		if (root == null) {
+			return;
+		}
+		else {
+			size++;
+		}
+		findSize(root.left);
+		findSize(root.right);
+	}
+	
+	public void s(Node a, Node b) {
+		
+	}
+	
+	public void insertNode() {
+		
+	}
 }
