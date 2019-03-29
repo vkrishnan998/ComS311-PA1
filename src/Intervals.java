@@ -1,22 +1,15 @@
 import java.util.ArrayList;
 
-import com.sun.javafx.scene.paint.GradientUtils.Point;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
-
 public class Intervals {
 	
 	RBTree rbT;
 	ArrayList<Integer> intervalIDs;
-	int interval_id;
-	ArrayList<Point> points;
-	
+	int interval_id;	
 	
 	public Intervals() {
 		rbT = new RBTree();
 		interval_id = 0;
-		intervalIDs = new ArrayList<Integer>();
-		points = new ArrayList<Point>();
-		
+		intervalIDs = new ArrayList<Integer>();		
 	}
 	
 	public void intervalInsert(int a, int b) {
