@@ -34,25 +34,25 @@ public class RBTree {
 	}
 	
 	public int recHeight(Node root) {
-		if (root == null) {
+		if (root == nil) {
 			return 0;
 		}
 	    else
 	    {  
-	        int lDepth = recHeight(root.left);
-	        int rDepth = recHeight(root.right);  
+	        int lHeight = recHeight(root.left);
+	        int rHeight = recHeight(root.right);  
 	      
-	        if (lDepth > rDepth) {
-	            return(lDepth + 1);  
+	        if (lHeight > rHeight) {
+	            return(lHeight + 1);  
 	        }
 	        else {
-	        	return(rDepth + 1); 
+	        	return(rHeight + 1); 
 	        }
 	    }  
 	}
 	
 	public void findSize(Node root) {
-		if (root == null) {
+		if (root == nil) {
 			return;
 		}
 		else {
