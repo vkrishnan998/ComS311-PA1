@@ -76,10 +76,10 @@ public class Node {
 		
 		if(v == RBTree.nil){
 			maxval = 0;
+			return;
 		}
 		
 		findMaxVal(v.left);
-		findMaxVal(v.right);
 		
 		int maxLeft = v.left.maxval;
 		int maxV = v.left.val + v.p;
@@ -89,6 +89,8 @@ public class Node {
 		int max2 = Math.max(max1, maxRight);
 		
 		maxval = max2;
+		
+		findMaxVal(v.right);
 		
 	}
 	
