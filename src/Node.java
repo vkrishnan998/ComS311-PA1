@@ -11,12 +11,18 @@ public class Node {
 	Endpoint emax;
 	Endpoint endPoint;
 	
+	
+	public Node() {
+		
+	}
+	
 	public Node(int key, int p) {
 		this.key = key;
 		this.p = p;
 		val = 0;
 		endPoint = new Endpoint(key);
 	}
+	
 	
 	public Node getParent(){
 		return parent;
@@ -43,9 +49,9 @@ public class Node {
 	}
 	
 	public int getMaxVal(){
-		
 		return maxval;
 	}
+	
 //	public static int findLeftMaxVal(Node v){
 //		int max = 0;
 //			
@@ -66,7 +72,7 @@ public class Node {
 //		return RBTree.inorder(v.right, max);
 //	}
 	
-	public static void findMaxVal(Node v){
+	public void findMaxVal(Node v){
 		
 		if(v == RBTree.nil){
 			maxval = 0;

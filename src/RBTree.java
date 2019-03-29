@@ -7,6 +7,7 @@ public class RBTree {
 	int size;
 	
 	public RBTree() {
+		nil = new Node();
 		root.color = 1;
 		nil.color = 1;
 		nil.p = 0;
