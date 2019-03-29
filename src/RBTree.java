@@ -34,19 +34,30 @@ public class RBTree {
 		return height;
 	}
 	
-	public void findBlackHeight(Node root) {
-		if (root == null) {
-			return;
+	public void findHeight() {
+		height = recHeight(root);
+	}
+	
+	public int recHeight(Node root) {
+		if (root == nil) {
+			return 0;
 		}
-		if (root.color == 1) {
-			height++;
-		}
-		findBlackHeight(root.left);
-		findBlackHeight(root.right);
+	    else
+	    {  
+	        int lHeight = recHeight(root.left);
+	        int rHeight = recHeight(root.right);  
+	      
+	        if (lHeight > rHeight) {
+	            return(lHeight + 1);  
+	        }
+	        else {
+	        	return(rHeight + 1); 
+	        }
+	    }  
 	}
 	
 	public void findSize(Node root) {
-		if (root == null) {
+		if (root == nil) {
 			return;
 		}
 		else {
