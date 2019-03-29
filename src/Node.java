@@ -72,7 +72,7 @@ public class Node {
 //		return RBTree.inorder(v.right, max);
 //	}
 	
-	public void findMaxVal(Node v){
+	public static void findMaxVal(Node v){
 		
 		if(v == RBTree.nil){
 			maxval = 0;
