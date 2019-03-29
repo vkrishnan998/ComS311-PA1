@@ -6,7 +6,7 @@ public class Node {
 	int color;
 	int key;
 	int p;
-	int val;
+	static int val;
 	int maxval;
 	Endpoint emax;
 	Endpoint endPoint;
@@ -43,7 +43,67 @@ public class Node {
 	}
 	
 	public int getMaxVal(){
+		
 		return maxval;
+	}
+	public int findLeftMaxVal(Node r, Node v){
+		int max = 0;
+		
+		if(v == RBTree.nil){
+			maxval = 0;
+		}
+		else{
+			if(r != RBTree.nil && v != RBTree.nil){
+				
+			if(r.key == v.key)
+				return 0;
+			
+			if(max < v.val)
+				max = v.val;
+		
+			findLeftMaxVal(RBTree.root, v.left);
+			findLeftMaxVal(RBTree.root, v.right);
+		}
+	}
+		return max;
+		
+	}
+	
+	public int findCenterMaxVal(Node v){
+		int max = 0;
+		
+		if(v == RBTree.nil){
+			maxval = 0;
+		}
+		
+		else{
+			max = v.left.p + v.p;
+		}
+		
+		return max;
+	}
+	
+	public int findRightMaxVal(Node r, Node v){
+		int max = 0;
+		
+		if(v == RBTree.nil){
+			maxval = 0;
+		}
+		
+		else{
+			if(max < v.val)
+				max = v.val;
+
+			RBTree.inorder(v.right);
+		}
+		return max;
+	}
+	
+	public void findMaxVal(Node v){
+		int max1 = Math.max(findLeftMaxVal(RBTree.root, v), findCenterMaxVal(v));
+		int max2 = Math.max(max1, findRightMaxVal(RBTree.root, v));
+		
+		maxval = max2;
 	}
 	
 	public Endpoint getEndpoint(){
@@ -58,8 +118,8 @@ public class Node {
 		return color;
 	}
 	
-	public void calcVal(Node v) {
-		if (v == null) {
+	public static void calcVal(Node v) {
+		if (v == RBTree.nil) {
 			return;
 		}
 		else {

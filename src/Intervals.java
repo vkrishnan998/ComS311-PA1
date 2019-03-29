@@ -19,6 +19,8 @@ public class Intervals {
 		intervalIDs.add(interval_id);
 		RBTree.RBInsert(left);
 		RBTree.RBInsert(right);
+		Node.calcVal(left);
+		Node.calcVal(right);
 		
 	}
 	

@@ -9,8 +9,13 @@ public class RBTree {
 	public RBTree() {
 		root.color = 1;
 		nil.color = 1;
+		nil.p = 0;
+		nil.val = 0;
+		nil.maxval = 0;
+		size = 0;
 		height = 1;
 		root = nil;
+		
 	}
 	
 	public Node getRoot() {
@@ -164,5 +169,13 @@ public class RBTree {
 		}
 		y.right = x;
 		x.parent = y;
+	}
+	
+	public static void inorder(Node x){
+		if(x == nil){
+			return;
+		}
+		inorder(x.left);
+		inorder(x.right);
 	}
 }
