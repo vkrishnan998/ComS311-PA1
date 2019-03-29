@@ -7,7 +7,7 @@ public class Node {
 	int key;
 	int p;
 	static int val;
-	int maxval;
+	static int maxval;
 	Endpoint emax;
 	Endpoint endPoint;
 	
@@ -46,48 +46,44 @@ public class Node {
 		
 		return maxval;
 	}
-	public int findLeftMaxVal(Node v){
-		int max = 0;
-			
-		if(max < v.val)
-			max = v.val;
-		
-		RBTree.inorder(v.left);
-
-		return max;
-		
-	}
+//	public static int findLeftMaxVal(Node v){
+//		int max = 0;
+//			
+//		return RBTree.inorder(v.left, max);
+//
+//	}
+//	
+//	public static int findCenterMaxVal(Node v){
+//		int max = 0;
+//	
+//		max = v.left.p + v.p;
+//		return max;
+//	}
+//	
+//	public static int findRightMaxVal(Node v){
+//		int max = v.left.val + v.p;
+//
+//		return RBTree.inorder(v.right, max);
+//	}
 	
-	public int findCenterMaxVal(Node v){
-		int max = 0;
-	
-		max = v.left.p + v.p;
-		return max;
-	}
-	
-	public int findRightMaxVal(Node v){
-		int max = v.left.val + v.p;
-		
-		if(max < v.val)
-			max = v.val;
-
-		RBTree.inorder(v.right);
-
-		return max;
-	}
-	
-	public void findMaxVal(Node v){
+	public static void findMaxVal(Node v){
 		
 		if(v == RBTree.nil){
 			maxval = 0;
 		}
 		
-		else{
-			int max1 = Math.max(findLeftMaxVal(v), findCenterMaxVal(v));
-			int max2 = Math.max(max1, findRightMaxVal(v));
+		findMaxVal(v.left);
+		findMaxVal(v.right);
 		
-			maxval = max2;
-		}
+		int maxLeft = v.left.maxval;
+		int maxV = v.left.val + v.p;
+		int maxRight = maxV + v.right.maxval;
+
+		int max1 = Math.max(maxLeft, maxV);
+		int max2 = Math.max(max1, maxRight);
+		
+		maxval = max2;
+		
 	}
 	
 	public Endpoint getEndpoint(){
@@ -111,5 +107,11 @@ public class Node {
 		}
 		calcVal(v.left);
 		calcVal(v.right);
+	}
+	
+	public void findEmax(Node v){
+		for(int i = 0; i < Intervals.rbT.getSize(); i++){
+			
+		}
 	}
 }
