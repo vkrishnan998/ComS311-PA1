@@ -29,15 +29,26 @@ public class RBTree {
 		return height;
 	}
 	
-	public void findBlackHeight(Node root) {
+	public void findHeight() {
+		height = recHeight(root);
+	}
+	
+	public int recHeight(Node root) {
 		if (root == null) {
-			return;
+			return 0;
 		}
-		if (root.color == 1) {
-			height++;
-		}
-		findBlackHeight(root.left);
-		findBlackHeight(root.right);
+	    else
+	    {  
+	        int lDepth = recHeight(root.left);
+	        int rDepth = recHeight(root.right);  
+	      
+	        if (lDepth > rDepth) {
+	            return(lDepth + 1);  
+	        }
+	        else {
+	        	return(rDepth + 1); 
+	        }
+	    }  
 	}
 	
 	public void findSize(Node root) {
