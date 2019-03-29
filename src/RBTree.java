@@ -1,8 +1,8 @@
 
 
 public class RBTree {
-	Node root;
-	Node nil;
+	static Node root;
+	static Node nil;
 	int height;
 	int size;
 	
@@ -55,7 +55,7 @@ public class RBTree {
 		
 	}
 	
-	public void RBInsert(Node z) {
+	public static void RBInsert(Node z) {
 		Node y = nil;
 		Node x = root;
 		while (x != nil) {
@@ -83,7 +83,7 @@ public class RBTree {
 		RBInsertFixup(z);
 	}
 	
-	public void RBInsertFixup(Node z) {
+	public static void RBInsertFixup(Node z) {
 		while (z.parent.color == 0) {
 			if (z.parent == z.parent.parent.left) {
 				Node y = z.parent.parent.right;
@@ -125,7 +125,7 @@ public class RBTree {
 		}
 	}
 	
-	public void leftRotate(Node x) {
+	public static void leftRotate(Node x) {
 		Node y = x.right;
 		x.right = y.left;
 		if (y.left != nil) {
@@ -146,7 +146,7 @@ public class RBTree {
 	}
 	
 	
-	public void rightRotate(Node x) {
+	public static void rightRotate(Node x) {
 		Node y = x.left;
 		x.left = y.right;
 		if (y.right != nil) {
