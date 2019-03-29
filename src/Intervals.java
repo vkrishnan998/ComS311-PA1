@@ -14,7 +14,7 @@ public class Intervals {
 	
 	public void intervalInsert(int a, int b) {
 		Node left = new Node(a, 1);
-		Node right = new Node(b, -1); 
+		Node right = new Node(b, -1);
 		interval_id++;
 		intervalIDs.add(interval_id);
 		RBTree.RBInsert(left);
