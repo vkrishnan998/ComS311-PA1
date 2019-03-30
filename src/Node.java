@@ -121,16 +121,14 @@ public class Node {
 		if (v == RBTree.nil) {
 			return;
 		}
-		else {
-			val += v.p;
-		}
 		calcVal(v.left);
+		val += v.p;
 		calcVal(v.right);
 	}
 	
-	public void findEmax(Node v){
-		for(int i = 0; i < Intervals.rbT.getSize(); i++){
-			
-		}
-	}
+//	public void findEmax(Node v){
+//		for(int i = 0; i < Intervals.rbT.getSize(); i++){
+//			
+//		}
+//	}
 }
