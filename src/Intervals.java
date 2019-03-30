@@ -43,13 +43,12 @@ public class Intervals {
 		Node right = new Node(b, -1);
 		interval_id++;
 		intervalIDs.add(interval_id);
+		
 		rbT.RBInsert(left);
-		// Node.calcVal(left);
-		// Node.findMaxVal(left);
 		rbT.RBInsert(right);
+		
 		rbT.calcVal(rbT.root);
-		// Node.calcVal(rbT.root);
-		rbT.root.findMaxVal(rbT.root);
+		rbT.root.findMaxValandEMax(rbT.root);
 
 	}
 

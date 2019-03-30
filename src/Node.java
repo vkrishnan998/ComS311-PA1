@@ -129,7 +129,7 @@ public class Node {
 	 * 
 	 * @param v
 	 */
-	public void findMaxVal(Node v) {
+	public void findMaxValandEMax(Node v) {
 
 		if (v == RBTree.nil) {
 			v.maxval = 0;
@@ -137,8 +137,8 @@ public class Node {
 			return;
 		}
 
-		findMaxVal(v.left);
-		findMaxVal(v.right);
+		findMaxValandEMax(v.left);
+		findMaxValandEMax(v.right);
 
 		int maxLeft = v.left.maxval;
 		int maxV = v.left.val + v.p;
