@@ -8,8 +8,8 @@ public class Node {
 	int p;
 	static int val;
 	static int maxval;
-	Endpoint emax;
-	Endpoint endPoint;
+	static Endpoint emax;
+	static Endpoint endPoint;
 	
 	
 	public Node() {
@@ -88,7 +88,18 @@ public class Node {
 		int max1 = Math.max(maxLeft, maxV);
 		int max2 = Math.max(max1, maxRight);
 		
+		if (max2 == v.left.maxval) {
+			emax = v.left.emax;
+		}
+		else if (max2 == (v.left.val + v.p)) {
+			emax = v.emax;
+		}
+		else {
+			emax = v.right.emax;
+		}
+		
 		maxval = max2;
+		
 		
 		findMaxVal(v.right);
 		
