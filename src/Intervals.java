@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Intervals {
 	
-	static RBTree rbT;
+	RBTree rbT;
 	ArrayList<Integer> intervalIDs;
 	int interval_id;	
 	
@@ -18,11 +18,11 @@ public class Intervals {
 		interval_id++;
 		intervalIDs.add(interval_id);
 		rbT.RBInsert(left);
+		//Node.calcVal(left);
+		//Node.findMaxVal(left);
 		rbT.RBInsert(right);
-		Node.calcVal(left);
-		Node.calcVal(right);
-		Node.findMaxVal(left);
-		Node.findMaxVal(right);
+		Node.calcVal(rbT.root);
+		Node.findMaxVal(rbT.root);
 
 	}
 	

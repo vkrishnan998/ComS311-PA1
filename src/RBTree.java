@@ -1,14 +1,13 @@
 
 
 public class RBTree {
-	static Node root;
+	Node root;
 	static Node nil;
 	int height;
 	int size;
 	
 	public RBTree() {
 		nil = new Node();
-		root.color = 1;
 		nil.color = 1;
 		nil.p = 0;
 		nil.val = 0;
@@ -138,8 +137,8 @@ public class RBTree {
 					leftRotate(z.parent.parent);
 				}
 			}
-			root.color = 0;
 		}
+		root.color = 1;
 	}
 	
 	public void leftRotate(Node x) {
