@@ -1,43 +1,76 @@
-
-
+/**
+ * Team members:
+ * @author Vatsal Bhatt
+ * @author Vignesh Krishnan
+ * 
+ * RBTree class, maintains operations on RBTree.
+ */
 public class RBTree {
 	Node root;
 	static Node nil;
 	int height;
 	int size;
 	
+	/**
+	 * RB Tree constructor. It initializes nil node as well.
+	 */
 	public RBTree() {
 		nil = new Node();
 		nil.color = 1;
 		nil.p = 0;
 		nil.val = 0;
 		nil.maxval = 0;
+		nil.endPoint = new Endpoint();
 		size = 0;
 		height = 0;
 		root = nil;
 		
 	}
 	
+	/**
+	 * Returns the root of teh tree.
+	 * @return
+	 */
 	public Node getRoot() {
 		return root;
 	}
 	
+	/**
+	 * Returns reference for the nil node, for the rbTree.
+	 * @return
+	 */
 	public Node getNILNode() {
 		return nil;
 	}
 	
+	/**
+	 * Returns the number of internal nodes in the tree.
+	 * @return
+	 */
 	public int getSize() {
 		return size;
 	}
 	
+	/**
+	 * Returns the height of the tree.
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 	
+	/**
+	 * Find height of the RB tree
+	 */
 	public void findHeight() {
 		height = recHeight(root);
 	}
 	
+	/**
+	 * Calculate height of the RB tree with recursion
+	 * @param root
+	 * @return
+	 */
 	public int recHeight(Node root) {
 		if (root == nil) {
 			return 0;
@@ -56,6 +89,10 @@ public class RBTree {
 	    }  
 	}
 	
+	/**
+	 * Calculate size of the RB tree
+	 * @param root
+	 */
 	public void findSize(Node root) {
 		if (root == nil) {
 			return;
@@ -67,10 +104,10 @@ public class RBTree {
 		findSize(root.right);
 	}
 	
-	public void s(Node a, Node b) {
-		
-	}
-	
+	/**
+	 * Node insertion algorithm for RB tree
+	 * @param z
+	 */
 	public void RBInsert(Node z) {
 		Node y = nil;
 		Node x = root;
@@ -99,6 +136,10 @@ public class RBTree {
 		RBInsertFixup(z);
 	}
 	
+	/**
+	 * Insertion fixup for RB tree
+	 * @param z
+	 */
 	public void RBInsertFixup(Node z) {
 		while (z.parent.color == 0) {
 			if (z.parent == z.parent.parent.left) {
@@ -139,8 +180,13 @@ public class RBTree {
 			}
 		}
 		root.color = 1;
+
 	}
 	
+	/**
+	 * Left rotation for insertion fixup 
+	 * @param x
+	 */
 	public void leftRotate(Node x) {
 		Node y = x.right;
 		x.right = y.left;
@@ -161,7 +207,10 @@ public class RBTree {
 		x.parent = y;
 	}
 	
-	
+	/**
+	 * Right rotate for insertion fixup
+	 * @param x
+	 */
 	public void rightRotate(Node x) {
 		Node y = x.left;
 		x.left = y.right;
@@ -182,12 +231,16 @@ public class RBTree {
 		x.parent = y;
 	}
 	
-	public static void inorder(Node x){
-		if(x == nil){
+	/**
+	 * Calculate and update val for nodes in the RB tree
+	 * @param v
+	 */
+	public void calcVal(Node v) {
+		if (v == nil) {
 			return;
 		}
-		
-		inorder(x.left);
-		inorder(x.right);
+		calcVal(v.left);
+		calcVal(v.right);
+		v.val = v.left.val + v.p + v.right.val;
 	}
 }

@@ -1,4 +1,10 @@
-
+/**
+ * Team members:
+ * @author Vatsal Bhatt
+ * @author Vignesh Krishnan
+ * 
+ * Node class for RBTree.
+ */
 public class Node {
 	Node left;
 	Node right;
@@ -6,14 +12,16 @@ public class Node {
 	int color;
 	int key;
 	int p;
-	static int val;
-	static int maxval;
+	int val;
+	int maxval;
 	Endpoint emax;
 	Endpoint endPoint;
 	
-	
-	public Node() {
-		
+	public Node(){
+		this.p = 0;
+		this.maxval = 0;
+		this.val = 0;
+		endPoint = new Endpoint();
 	}
 	
 	public Node(int key, int p) {
@@ -23,63 +31,102 @@ public class Node {
 		endPoint = new Endpoint(key);
 	}
 	
-	
+	/**
+	 * Returns the parent of this node.
+	 * @return
+	 */
 	public Node getParent(){
 		return parent;
 	}
 	
+	/**
+	 * Returns the left child.
+	 * @return
+	 */
 	public Node getLeft(){
 		return left;
 	}
 	
+	/**
+	 * Returns the right child.
+	 * @return
+	 */
 	public Node getRight(){
 		return right;
 	}
 	
+	/**
+	 * Returns the endpoint value, which is an integer.
+	 * @return
+	 */
 	public int getKey(){
 		return key;
 	}
 	
+	/**
+	 * Returns the value of the functionpbased on this endpoint.
+	 * @return
+	 */
 	public int getP(){
 		return p;
 	}
 	
+	/**
+	 * Returns the val of the node as described in this assignment.
+	 * @return
+	 */
 	public int getVal(){
 		return val;
 	}
 	
+	/**
+	 * Returns themaxvalof the node as described in this assignment.
+	 * @return
+	 */
 	public int getMaxVal(){
 		return maxval;
 	}
 	
-//	public static int findLeftMaxVal(Node v){
-//		int max = 0;
-//			
-//		return RBTree.inorder(v.left, max);
-//
-//	}
-//	
-//	public static int findCenterMaxVal(Node v){
-//		int max = 0;
-//	
-//		max = v.left.p + v.p;
-//		return max;
-//	}
-//	
-//	public static int findRightMaxVal(Node v){
-//		int max = v.left.val + v.p;
-//
-//		return RBTree.inorder(v.right, max);
-//	}
+	/**
+	 * Returns theEndpointobject that this node represents.
+	 * @return
+	 */
+	public Endpoint getEndpoint(){
+		return endPoint; 
+	}
 	
-	public static void findMaxVal(Node v){
+	/**
+	 * Returns anEndpointobject that represents emax. 
+	 * Calling this method on the root node will give the End point object whose getValue() 
+	 * provides a point of maximum overlap.
+	 * @return
+	 */
+	public Endpoint getEmax(){
+		return emax;
+	}
+	
+	/**
+	 * Returns 0 if red. Returns 1 if black.
+	 * @return
+	 */
+	public int getColor(){
+		return color;
+	}
+	
+	/**
+	 * Calculate and update maxval for nodes
+	 * @param v
+	 */
+	public void findMaxVal(Node v){
 		
 		if(v == RBTree.nil){
-			maxval = 0;
+			v.maxval = 0;
+			v.emax = RBTree.nil.endPoint;
 			return;
 		}
 		
 		findMaxVal(v.left);
+		findMaxVal(v.right);
 		
 		int maxLeft = v.left.maxval;
 		int maxV = v.left.val + v.p;
@@ -88,36 +135,16 @@ public class Node {
 		int max1 = Math.max(maxLeft, maxV);
 		int max2 = Math.max(max1, maxRight);
 		
-		maxval = max2;
+		v.maxval = max2;
 		
-		findMaxVal(v.right);
-		
+		if (max2 == v.left.maxval) {
+			v.emax = v.left.emax;
+			}
+			else if (max2 == (v.left.val + v.p)) {
+			v.emax = v.endPoint;
+			}
+			else {
+			v.emax = v.right.emax;
+			}
 	}
-	
-	public Endpoint getEndpoint(){
-		return endPoint; 
-	}
-	
-	public Endpoint getEmax(){
-		return emax;
-	}
-	
-	public int getColor(){
-		return color;
-	}
-	
-	public static void calcVal(Node v) {
-		if (v == RBTree.nil) {
-			return;
-		}
-		calcVal(v.left);
-		val += v.p;
-		calcVal(v.right);
-	}
-	
-//	public void findEmax(Node v){
-//		for(int i = 0; i < Intervals.rbT.getSize(); i++){
-//			
-//		}
-//	}
 }
