@@ -15,7 +15,7 @@ public class Endpoint {
 	}
 
 	public Endpoint() {
-		this.value = -999;
+		this.value = -999; //just to identify null endpoint
 	}
 
 	/**

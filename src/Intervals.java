@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  * Team members:
@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * @author Vatsal Bhatt
  * @author Vignesh Krishnan
  * 
- *         A wrapper class for RBTree
+ * A wrapper class for RBTree
  */
 public class Intervals {
 
 	RBTree rbT;
-	ArrayList<Integer> intervalIDs;
+	Hashtable<Integer, Node[]> intervalIDs;
 	int interval_id;
 
 	/**
@@ -20,7 +20,7 @@ public class Intervals {
 	public Intervals() {
 		rbT = new RBTree();
 		interval_id = 0;
-		intervalIDs = new ArrayList<Integer>();
+		intervalIDs = new Hashtable<Integer, Node[]>();
 	}
 
 	/**
@@ -42,19 +42,27 @@ public class Intervals {
 		Node left = new Node(a, 1);
 		Node right = new Node(b, -1);
 		interval_id++;
-		intervalIDs.add(interval_id);
+		Node[] interval = {left,right};
+		intervalIDs.put(interval_id, interval);
 		rbT.RBInsert(left);
-		// Node.calcVal(left);
-		// Node.findMaxVal(left);
 		rbT.RBInsert(right);
+		rbT.findHeight();
+		rbT.findSize(rbT.root);
 		rbT.calcVal(rbT.root);
-		// Node.calcVal(rbT.root);
-		rbT.root.findMaxVal(rbT.root);
+		rbT.findMaxVal(rbT.root);
 
 	}
 
 	public boolean intervalDelete(int intervalID) {
-		return false;
+		Node right = intervalIDs.get(intervalID)[1];
+		Node left = intervalIDs.get(intervalID)[0];
+		rbT.RBDelete(right);
+		rbT.RBDelete(left);
+		rbT.findHeight();
+		rbT.findSize(rbT.root);
+		rbT.calcVal(rbT.root);
+		rbT.findMaxVal(rbT.root);
+		return true;
 	}
 
 	/**
@@ -77,20 +85,21 @@ public class Intervals {
 	}
 
 	/**
+	 * 
 	 * This is a suggested way on how to add intervals and call POM()
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		int points[][] = { { 0, 4 }, { 1, 6 }, { 3, 9 }, { 7, 11 } };
+
 		Intervals intv = new Intervals();
 
 		for (int i = 0; i < points.length; i++) {
 			// System.out.println("Inserting: "+ Arrays.toString(points[i]));
 			intv.intervalInsert(points[i][0], points[i][1]);
-		}
+		}		
 		System.out.println("POM is: " + intv.findPOM()); // Should return 3.
-		System.out.println("Emax: " + intv.rbT.root.emax.getValue());
 	}
 
 }

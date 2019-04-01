@@ -178,12 +178,147 @@ public class RBTree {
 				}
 			}
 		}
-		root.color = 1;
 
+		// handling duplicate Enpoint overlap
+		if (!z.equals(root) && z.parent.key == z.key) {
+			if (z.parent.p == -1 && z.p == 1 && z.equals(z.parent.right)) {
+				z.parent.p = 1;
+				z.p = -1;
+			}
+		}
+
+		root.color = 1;
+	}
+	
+	/**
+	 * RB Transplant
+	 * @param u
+	 * @param v
+	 */
+	public void RBTransplant(Node u, Node v) {
+		if (u.parent == nil) {
+			root = v;
+		} else if (u == u.parent.left) {
+			u.parent.left = v;
+		} else {
+			u.parent.right = v;
+		}
+		v.parent = u.parent;
+	}
+	
+	/**
+	 * Find minimum of the RB Tree
+	 * @param x
+	 * @return minimum node
+	 */
+	public Node Minimum(Node x) {
+		Node current = x;
+
+		/* loop down to find the leftmost leaf */
+		while (current.left != null) {
+			current = current.left;
+		}
+		return (current);
+	}
+	
+	/**
+	 * To delete a node from the RB Tree
+	 * @param z Node to delete
+	 */
+	public void RBDelete(Node z) {
+		Node y = z;
+		int yOrigColor = y.color;
+		Node x = root;
+		if (z.left == nil) {
+			x = z.right;
+			RBTransplant(z, z.right);
+		} else if (z.right == nil) {
+			x = z.left;
+			RBTransplant(z, z.left);
+		} else {
+			y = Minimum(z.right);
+			yOrigColor = y.color;
+			x = y.right;
+			if (y.parent == z) {
+				x.parent = y;
+			} else {
+				RBTransplant(y, y.right);
+				y.right = z.right;
+				y.right.parent = y;
+			}
+			RBTransplant(z, y);
+			y.left = z.left;
+			y.left.parent = y;
+			y.color = z.color;
+
+		}
+		if (yOrigColor == 1) {
+			RBDeleteFixup(x);
+		}
+
+	}
+	
+	/**
+	 * Deletion fixup
+	 * @param x
+	 */
+	public void RBDeleteFixup(Node x) {
+		while (x != root && x.color == 1) {
+			if (x == x.parent.left) {
+				Node w = x.parent.right;
+				if (w.color == 0) {
+					w.color = 1;
+					x.parent.color = 0;
+					leftRotate(x.parent);
+					w = x.parent.right;
+				}
+				if (w.left.color == 1 && w.right.color == 1) {
+					w.color = 0;
+					x = x.parent;
+				} else {
+					if (w.right.color == 1) {
+						w.left.color = 1;
+						w.color = 0;
+						rightRotate(w);
+						w = x.parent.right;
+					}
+					w.color = x.parent.color;
+					x.parent.color = 1;
+					w.right.color = 1;
+					leftRotate(x.parent);
+					x = root;
+				}
+			} else {
+				Node w = x.parent.left;
+				if (w.color == 0) {
+					w.color = 1;
+					x.parent.color = 0;
+					rightRotate(x.parent);
+					w = x.parent.left;
+				}
+				if (w.right.color == 1 && w.left.color == 1) {
+					w.color = 0;
+					x = x.parent;
+				} else {
+					if (w.left.color == 1) {
+						w.right.color = 1;
+						w.color = 0;
+						leftRotate(w);
+						w = x.parent.left;
+					}
+					w.color = x.parent.color;
+					x.parent.color = 1;
+					w.left.color = 1;
+					rightRotate(x.parent);
+					x = root;
+				}
+			}
+		}
+		x.color = 1;
 	}
 
 	/**
-	 * Left rotation for insertion fixup
+	 * Left rotation for insertion/deletion fixup
 	 * 
 	 * @param x
 	 */
@@ -206,7 +341,7 @@ public class RBTree {
 	}
 
 	/**
-	 * Right rotate for insertion fixup
+	 * Right rotate for insertion/deletion fixup
 	 * 
 	 * @param x
 	 */
@@ -240,5 +375,39 @@ public class RBTree {
 		calcVal(v.left);
 		calcVal(v.right);
 		v.val = v.left.val + v.p + v.right.val;
+	}
+
+	/**
+	 * Calculate and update maxval for nodes
+	 * 
+	 * @param v
+	 */
+	public void findMaxVal(Node v) {
+
+		if (v == RBTree.nil) {
+			v.maxval = 0;
+			v.emax = RBTree.nil.endPoint;
+			return;
+		}
+
+		findMaxVal(v.left);
+		findMaxVal(v.right);
+
+		int maxLeft = v.left.maxval;
+		int maxV = v.left.val + v.p;
+		int maxRight = maxV + v.right.maxval;
+
+		int max1 = Math.max(maxLeft, maxV);
+		int max2 = Math.max(max1, maxRight);
+
+		v.maxval = max2;
+
+		if (max2 == v.left.maxval) {
+			v.emax = v.left.emax;
+		} else if (max2 == (v.left.val + v.p)) {
+			v.emax = v.endPoint;
+		} else {
+			v.emax = v.right.emax;
+		}
 	}
 }

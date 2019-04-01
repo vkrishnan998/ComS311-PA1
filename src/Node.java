@@ -124,37 +124,6 @@ public class Node {
 		return color;
 	}
 
-	/**
-	 * Calculate and update maxval for nodes
-	 * 
-	 * @param v
-	 */
-	public void findMaxVal(Node v) {
-
-		if (v == RBTree.nil) {
-			v.maxval = 0;
-			v.emax = RBTree.nil.endPoint;
-			return;
-		}
-
-		findMaxVal(v.left);
-		findMaxVal(v.right);
-
-		int maxLeft = v.left.maxval;
-		int maxV = v.left.val + v.p;
-		int maxRight = maxV + v.right.maxval;
-
-		int max1 = Math.max(maxLeft, maxV);
-		int max2 = Math.max(max1, maxRight);
-
-		v.maxval = max2;
-
-		if (max2 == v.left.maxval) {
-			v.emax = v.left.emax;
-		} else if (max2 == (v.left.val + v.p)) {
-			v.emax = v.endPoint;
-		} else {
-			v.emax = v.right.emax;
-		}
-	}
+	
+	
 }
