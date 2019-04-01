@@ -50,7 +50,6 @@ public class Intervals {
 		rbT.findSize(rbT.root);
 		rbT.calcVal(rbT.root);
 		rbT.findMaxVal(rbT.root);
-
 	}
 
 	public boolean intervalDelete(int intervalID) {

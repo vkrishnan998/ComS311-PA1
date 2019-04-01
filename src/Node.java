@@ -123,7 +123,4 @@ public class Node {
 	public int getColor() {
 		return color;
 	}
-
-	
-	
 }
